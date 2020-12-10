@@ -1,0 +1,27 @@
+<div class="example-container">
+  <form [formGroup]="transferForm" (ngSubmit)="onSubmitTransfer()">
+    <mat-form-field appearance="legacy">
+      <mat-label>From Account</mat-label>
+      <input matInput formControlName="from" />
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="legacy">
+      <mat-label>To Account</mat-label>
+      <input matInput formControlName="to" />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <mat-label>Amount</mat-label>
+      <input matInput formControlName="amount" />
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="transferForm.invalid"
+    >
+      Submit
+    </button>
+  </form>
+</div>

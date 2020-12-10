@@ -1,0 +1,30 @@
+<input type="text" [(ngModel)]="filter" (ngModelChange)="applyFilter($event)" />
+<br />
+<br />
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th (click)="sortBy('merchant[name]')">Benificiary</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tr *ngFor="let transaction of filteredTransactions">
+    <td>
+      <a>
+        {{ transaction.merchant.name }}
+      </a>
+    </td>
+
+    <td>
+      {{
+        transaction.transaction.amountCurrency.amount
+          | currency: currencyCode:"symbol"
+      }}
+    </td>
+  </tr>
+
+  <tr *ngIf="!filteredTransactions || !filteredTransactions.length">
+    <td colspan="2">No Transactions</td>
+  </tr>
+</table>
+<br />
