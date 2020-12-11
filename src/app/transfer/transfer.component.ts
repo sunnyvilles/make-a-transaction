@@ -12,24 +12,26 @@ import { TransactionsService } from '../services/transactions.service';
 })
 export class TransferComponent implements OnInit {
   transferForm: FormGroup;
-  totalAmount: number;
   text: string;
+  #totalAmount: number;
 
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
     private transactionsService: TransactionsService
   ) {
-    this.totalAmount = 5824.76;
+    this.#totalAmount = 5824.76;
   }
 
   ngOnInit(): void {
-    this.initialize();
+    this.initializeFormData();
   }
-
-  initialize(): void {
+  initializeFormData(): void {
     this.transferForm = this.fb.group({
-      from: `Free checking(4692) - $${this.totalAmount}`,
+      from: {
+        value: `Free checking(4692) - $${this.#totalAmount}`,
+        disabled: true,
+      },
       to: ['', Validators.required],
       amount: ['', Validators.required],
     });
@@ -47,17 +49,25 @@ export class TransferComponent implements OnInit {
       data: this.transferForm.value,
     });
 
-    dialogRef.afterClosed().subscribe(() => {
-      this.onClose();
+    dialogRef.afterClosed().subscribe((data) => {
+      // inform the service to add new transaction
+      if (data) {
+        this.transactionsService.addNewTransaction(data);
+        this.#totalAmount = this.calculateTotalAmount();
+      }
+      this.initializeFormData();
     });
   }
 
-  onClose(): void {
+  calculateTotalAmount(): number {
     // change the total amount
-    const amount = this.transferForm.get('amount').value;
-    this.totalAmount -= amount;
-    // inform the service to add new transaction
-    this.transactionsService.addNewTransaction(this.transferForm);
-    this.initialize();
+    return this.#totalAmount - this.transferForm.get('amount').value;
+  }
+
+  totalAmountIsInvalid(): boolean {
+    return (
+      this.transferForm.get('amount').value < 0 ||
+      this.calculateTotalAmount() < -500
+    );
   }
 }

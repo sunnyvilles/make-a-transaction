@@ -2,7 +2,7 @@
   <form [formGroup]="transferForm" (ngSubmit)="onSubmitTransfer()">
     <mat-form-field appearance="legacy">
       <mat-label>From Account</mat-label>
-      <input matInput formControlName="from" />
+      <input matInput [disabled]="true" formControlName="from" />
     </mat-form-field>
     <br />
     <mat-form-field appearance="legacy">
@@ -21,7 +21,7 @@
     <br />
     <mat-form-field>
       <mat-label>Amount</mat-label>
-      <input matInput id="amount" formControlName="amount" />
+      <input matInput type="number" id="amount" formControlName="amount" />
     </mat-form-field>
     <div
       *ngIf="
@@ -31,12 +31,15 @@
     >
       You must enter amount
     </div>
+    <div *ngIf="totalAmountIsInvalid()">
+      You account balance is not sufficient
+    </div>
 
     <button
       mat-raised-button
       color="primary"
       type="submit"
-      [disabled]="transferForm.invalid"
+      [disabled]="transferForm.invalid || totalAmountIsInvalid()"
     >
       Submit
     </button>

@@ -1,4 +1,6 @@
 <input type="text" [(ngModel)]="filter" (ngModelChange)="applyFilter($event)" />
+<button (click)="sortBy('merchant[name]')" mat-button>Benificiary</button>
+
 <br />
 <br />
 <table class="table table-hover">
@@ -6,8 +8,8 @@
     <tr>
       <th></th>
       <th></th>
-      <th (click)="sortBy('merchant[name]')">Benificiary</th>
-      <th>Amount</th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tr *ngFor="let transaction of filteredTransactions">
@@ -24,7 +26,6 @@
     </td>
     <td>
       <a>
-        {{ transaction.merchant.name.replace(" ", "-") | lowercase }}
         {{ transaction.merchant.name }}
       </a>
     </td>

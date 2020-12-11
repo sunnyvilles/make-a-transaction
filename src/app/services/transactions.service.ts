@@ -13,8 +13,21 @@ export class TransactionsService {
   addTransaction: EventEmitter<ITransactionData> = new EventEmitter();
   newTransaction: ITransactionData;
 
-  constructor(private http: HttpClient) {
-    this.newTransaction = {
+  constructor(private http: HttpClient) {}
+
+  getAllTransactions(): Observable<ITransactionData[]> {
+    return this.http.get<ITransactionData[]>(baseUrl + 'transactions.json');
+  }
+
+  addNewTransaction(formData): void {
+    this.newTransaction = this.getNewDataInstance();
+    this.newTransaction.merchant.name = formData.to;
+    this.newTransaction.transaction.amountCurrency.amount = formData.amount;
+    this.addTransaction.emit(this.newTransaction);
+  }
+
+  getNewDataInstance(): ITransactionData {
+    return {
       dates: {
         valueDate: new Date().getTime(),
       },
@@ -27,17 +40,5 @@ export class TransactionsService {
         name: '',
       },
     };
-  }
-
-  getAllTransactions(): Observable<ITransactionData[]> {
-    return this.http.get<ITransactionData[]>(baseUrl + 'transactions.json');
-  }
-
-  addNewTransaction(formData): void {
-    this.newTransaction.merchant.name = formData.get('to').value;
-    this.newTransaction.transaction.amountCurrency.amount = formData.get(
-      'amount'
-    ).value;
-    this.addTransaction.emit(this.newTransaction);
   }
 }
