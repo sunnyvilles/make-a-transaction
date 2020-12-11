@@ -4,7 +4,7 @@ import { ITransactionData } from '../shared/transaction-data';
 @Injectable()
 export class SortingService {
   direction = 1;
-  sortBy(transactions: any[]): ITransactionData[] {
+  sortBy(transactions: any[], key: any): ITransactionData[] {
     const result: ITransactionData[] = transactions.sort((obj1, obj2) => {
       // temeprarily sorting on merchant
       const key1 = obj1.merchant.name.toLowerCase();
