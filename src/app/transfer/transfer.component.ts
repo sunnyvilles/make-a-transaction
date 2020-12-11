@@ -31,7 +31,7 @@ export class TransferComponent implements OnInit {
     this.transferForm = this.fb.group({
       from: `Free checking(4692) - $${this.totalAmount}`,
       to: ['', Validators.required],
-      amount: [0, Validators.required],
+      amount: ['', Validators.required],
     });
   }
 
@@ -47,18 +47,17 @@ export class TransferComponent implements OnInit {
       data: this.transferForm.value,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe(() => {
       this.onClose();
     });
   }
 
   onClose(): void {
-    //change the total amount
+    // change the total amount
     const amount = this.transferForm.get('amount').value;
     this.totalAmount -= amount;
-
-    //inform the service to add new transaction
+    // inform the service to add new transaction
     this.transactionsService.addNewTransaction(this.transferForm);
-    this.transferForm.reset();
+    this.initialize();
   }
 }

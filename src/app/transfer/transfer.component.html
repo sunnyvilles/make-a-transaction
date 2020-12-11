@@ -9,11 +9,28 @@
       <mat-label>To Account</mat-label>
       <input matInput formControlName="to" />
     </mat-form-field>
+    <div
+      *ngIf="
+        transferForm.get('to').touched &&
+        transferForm.get('to').hasError('required')
+      "
+    >
+      You must enter a merchant
+    </div>
+
     <br />
     <mat-form-field>
       <mat-label>Amount</mat-label>
-      <input matInput formControlName="amount" />
+      <input matInput id="amount" formControlName="amount" />
     </mat-form-field>
+    <div
+      *ngIf="
+        transferForm.get('amount').touched &&
+        transferForm.get('amount').hasError('required')
+      "
+    >
+      You must enter amount
+    </div>
 
     <button
       mat-raised-button
