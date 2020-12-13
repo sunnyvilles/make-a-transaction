@@ -7,6 +7,7 @@ https://make-a-transaction-angular-11.netlify.app/
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Node v: 14
 
 ## Build
 

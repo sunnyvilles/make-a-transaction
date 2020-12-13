@@ -1,45 +1,51 @@
-<input type="text" [(ngModel)]="filter" (ngModelChange)="applyFilter($event)" />
-<button (click)="sortBy('merchant[name]')" mat-button>Benificiary</button>
-
-<br />
-<br />
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tr *ngFor="let transaction of filteredTransactions">
-    <td>{{ transaction.dates.valueDate | date: "mediumDate" }}</td>
-    <td>
-      <img
-        width="10%"
-        alt="Logo"
-        class="logo"
-        src="./assets/icons/{{
-          transaction.merchant.name.replaceAll(' ', '-') | lowercase
-        }}.png"
+<div class="transaction-container" fxLayout="column" fxLayoutGap="20px">
+  <div fxLayout="row" fxLayoutAlign="space-between">
+    <mat-form-field appearance="legacy">
+      <input
+        matInput
+        placeholder="search by typing..."
+        [(ngModel)]="filter"
+        (ngModelChange)="applyFilter($event)"
       />
-    </td>
-    <td>
-      <a>
-        {{ transaction.merchant.name }}
-      </a>
-    </td>
+    </mat-form-field>
+    <div>
+      <strong>sort by &nbsp;</strong>
+      <button (click)="sortBy('merchant')" mat-stroked-button>
+        Benificiary
+        <mat-icon>swap_vert</mat-icon>
+      </button>
+    </div>
+  </div>
 
-    <td>
-      {{
-        transaction.transaction.amountCurrency.amount
-          | currency: currencyCode:"symbol"
-      }}
-    </td>
-  </tr>
+  <table class="table">
+    <tbody>
+      <tr *ngFor="let transaction of filteredTransactions">
+        <td style="white-space: nowrap">
+          {{ transaction.dates.valueDate | date: "MMM d" }}
+        </td>
+        <td>
+          <img
+            width="10%"
+            class="logo"
+            onerror="this.src='./assets/icons/default.png'"
+            src="./assets/icons/{{
+              transaction.merchant.name.replaceAll(' ', '-') | lowercase
+            }}.png"
+          />
+        </td>
+        <td>
+          {{ transaction.merchant.name }}
+        </td>
 
-  <tr *ngIf="!filteredTransactions || !filteredTransactions.length">
-    <td colspan="2">No Transactions</td>
-  </tr>
-</table>
-<br />
+        <td>
+          -
+          {{ transaction.transaction.amountCurrency.amount | currency: "EUR" }}
+        </td>
+      </tr>
+
+      <tr *ngIf="!filteredTransactions || !filteredTransactions.length">
+        <td colspan="2">No Transactions</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

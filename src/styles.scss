@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+html, body {
+  height: 100%;
+}
+
+body{
+  background: url('./assets/background.jpg') no-repeat center center fixed;
+}
+
+.align-center{
+  margin:0 auto;
+}
+
+.mt-15{
+  padding-top:15px;
+}
+
+.b1{
+  border:1px dotted red;
+}

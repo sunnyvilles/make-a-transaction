@@ -1,10 +1,20 @@
-<h1 mat-dialog-title>Confirm the transfer</h1>
+<mat-toolbar color="accent">
+  <span mat-dialog-title class="align-center">Confirm the transfer</span>
+</mat-toolbar>
 
 <div mat-dialog-content>
-  <div>{{ data.to }}</div>
-  <div>{{ data.amount }}</div>
+  <mat-toolbar fxLayout="column">
+    <mat-toolbar-row>
+      <span fxFlex="50" fxLayoutAlign="end">Merchant</span>
+      <span fxFlex="50" fxLayoutAlign="center">{{ data.to }}</span>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+      <span fxFlex="50" fxLayoutAlign="end">Amount</span>
+      <span fxFlex="50" fxLayoutAlign="center">{{ data.amount }}</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions align="end">
   <button mat-button (click)="onCancel()">Cancel</button>
   <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Confirm</button>
 </div>

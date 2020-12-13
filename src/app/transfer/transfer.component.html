@@ -1,10 +1,14 @@
-<div class="example-container">
-  <form [formGroup]="transferForm" (ngSubmit)="onSubmitTransfer()">
+<div class="transfer-container" fxLayoutAlign="center">
+  <form
+    [formGroup]="transferForm"
+    (ngSubmit)="onSubmitTransfer()"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+  >
     <mat-form-field appearance="legacy">
       <mat-label>From Account</mat-label>
       <input matInput [disabled]="true" formControlName="from" />
     </mat-form-field>
-    <br />
     <mat-form-field appearance="legacy">
       <mat-label>To Account</mat-label>
       <input matInput formControlName="to" />
@@ -18,7 +22,6 @@
       You must enter a merchant
     </div>
 
-    <br />
     <mat-form-field>
       <mat-label>Amount</mat-label>
       <input matInput type="number" id="amount" formControlName="amount" />
@@ -35,13 +38,15 @@
       You account balance is not sufficient
     </div>
 
-    <button
-      mat-raised-button
-      color="primary"
-      type="submit"
-      [disabled]="transferForm.invalid || totalAmountIsInvalid()"
-    >
-      Submit
-    </button>
+    <div class="mt-15">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="transferForm.invalid || totalAmountIsInvalid()"
+      >
+        Submit
+      </button>
+    </div>
   </form>
 </div>

@@ -8,7 +8,6 @@ import { TransactionsService } from '../services/transactions.service';
 @Component({
   selector: 'app-transfer',
   templateUrl: './transfer.component.html',
-  styleUrls: ['./transfer.component.scss'],
 })
 export class TransferComponent implements OnInit {
   transferForm: FormGroup;

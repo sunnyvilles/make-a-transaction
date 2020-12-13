@@ -1,16 +1,39 @@
-<div class="container">
-  <div class="application-header" role="banner">
+<div class="container" fxLayout="column" fxLayoutAlign="center center">
+  <header
+    fxLayoutAlign="left center"
+    fxLayoutAlign.xs="center center"
+    fxFlexFill
+  >
     <img width="180" alt="Logo" class="logo" src="./assets/logo.jpg" />
-  </div>
-  <div class="content" role="main">
-    <div
-      fxLayout="row"
-      fxLayout.xs="column"
-      fxFlexAlign="center"
-      fxLayoutAlign="space-between"
-    >
-      <mat-card fxFlex="25%"><app-transfer></app-transfer></mat-card>
-      <mat-card fxFlex="70%"><app-transactions></app-transactions></mat-card>
+  </header>
+  <div
+    class="content"
+    fxLayoutGap="20px"
+    fxLayout="row"
+    fxLayout.lt-md="column"
+    fxLayoutAlign="space-around start center"
+    fxLayoutAlign.lt-md="space-around center start"
+    fxFlexOffset="30px"
+  >
+    <div fxFlex.gt-sm="25" fxFlex.lt-md="90">
+      <mat-toolbar color="accent">
+        <mat-icon>sync</mat-icon>
+        <span class="align-center">Make a Transfer</span>
+      </mat-toolbar>
+      <mat-card>
+        <app-transfer></app-transfer>
+      </mat-card>
+    </div>
+    <div fxFlex.gt-sm="70" fxFlex.lt-md="90">
+      <div>
+        <mat-toolbar color="accent">
+          <mat-icon>card_travel</mat-icon>
+          <span class="align-center">Recent Transactions</span>
+        </mat-toolbar>
+        <mat-card>
+          <app-transactions></app-transactions>
+        </mat-card>
+      </div>
     </div>
   </div>
 </div>

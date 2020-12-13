@@ -4,6 +4,9 @@
 @import '~@angular/material/theming';
 // Plus imports for other components in your app.
 
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100&display=swap');
+
+
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
@@ -13,7 +16,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $make-a-transaction-primary: mat-palette($mat-indigo);
-$make-a-transaction-accent: mat-palette($mat-pink, A200, A100, A400);
+$make-a-transaction-accent: mat-palette($mat-teal, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $make-a-transaction-warn: mat-palette($mat-red);
@@ -28,11 +31,17 @@ $make-a-transaction-theme: mat-light-theme((
   )
 ));
 
+
+
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($make-a-transaction-theme);
 
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+$custom-typography: mat-typography-config(
+  $font-family: 'Kanit'
+);
+@include angular-material-typography($custom-typography);
+
+

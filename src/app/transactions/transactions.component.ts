@@ -45,9 +45,9 @@ export class TransactionsComponent implements OnInit {
   }
 
   calculateOrders(): void {
-    //this.customersOrderTotal = 0;
+    // this.customersOrderTotal = 0;
     this.filteredTransactions.forEach((cust: ITransactionData) => {
-      //this.customersOrderTotal += cust.orderTotal;
+      // this.customersOrderTotal += cust.orderTotal;
     });
   }
 
