@@ -3,18 +3,23 @@ import { TransferComponent } from './transfer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TransactionsService } from '../services/transactions.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('TransferComponent', () => {
   let component: TransferComponent;
   let fixture: ComponentFixture<TransferComponent>;
-  let service: TransactionsService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TransferComponent],
-      imports: [FormsModule, ReactiveFormsModule, MatDialogModule],
+      imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        MatDialogModule,
+        HttpClientTestingModule,
+      ],
+      providers: [TransactionsService],
     }).compileComponents();
-    service = TestBed.inject(TransactionsService);
   });
 
   beforeEach(() => {
@@ -27,7 +32,20 @@ describe('TransferComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have total amount ', () => {
-    expect(component['#totalAmount']).toEqual(5824.76);
+  it('should check if total amount is valid', () => {
+    component.transferForm.setValue({
+      amount: 23,
+      from: 'test',
+      to: 'merchant',
+    });
+    expect(component.totalAmountIsInvalid()).toBeFalse();
+  });
+  it('should check if total amount is invalid', () => {
+    component.transferForm.setValue({
+      amount: 7000,
+      from: 'test',
+      to: 'merchant',
+    });
+    expect(component.totalAmountIsInvalid()).toBeTrue();
   });
 });
