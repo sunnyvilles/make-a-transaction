@@ -18,7 +18,7 @@ export class TransactionsService {
 
   getAllTransactions(): Observable<ITransactionData[]> {
     return this.http
-      .get<ITransactionData[]>(baseUrl + 'transactions2.json')
+      .get<ITransactionData[]>(baseUrl + 'transactions.json')
       .pipe(retry(1), catchError(this.onError));
   }
 
