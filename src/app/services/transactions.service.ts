@@ -1,6 +1,7 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { retry, catchError } from 'rxjs/operators';
 import { ITransactionData } from '../shared/transaction-data';
 
 const baseUrl = 'assets/';
@@ -16,7 +17,14 @@ export class TransactionsService {
   constructor(private http: HttpClient) {}
 
   getAllTransactions(): Observable<ITransactionData[]> {
-    return this.http.get<ITransactionData[]>(baseUrl + 'transactions.json');
+    return this.http
+      .get<ITransactionData[]>(baseUrl + 'transactions2.json')
+      .pipe(retry(1), catchError(this.onError));
+  }
+
+  onError(err: any): Observable<any> {
+    const message = 'error while getting list of transactions: ' + err.status;
+    return throwError(message);
   }
 
   addNewTransaction(formData): void {
