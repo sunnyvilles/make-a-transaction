@@ -30,3 +30,9 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
   custom validators for fields
   sorting on all fields
   User interface for table
+  App is not completely responsive on mobile devices and the transfer form placeholder hides the amount field and is horizontally scrollable
+  Form is not reset upon successful transfer and form fields are shown invalid.
+  Transactions service is provided in root but is also added to `providers` array of the Shared Module
+  Sporadic use of `any`. Not using proper types.
+  No use of async pipes but subscribing in components without unsubscribing thus causing potential memory leaks
+  Data mutation and impure functions used inside transactions and transfer components when it could have been avoided
